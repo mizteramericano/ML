@@ -1,0 +1,39 @@
+#--------ลองทำ Lab 07/10/2026------------
+from distributed.utils_test import cluster
+from sklearn import datasets
+from matplotlib import pyplot as plt
+from sklearn.cluster import DBSCAN
+import numpy as np
+
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+print(X.shape)
+sapal = X[:,0]
+print("Target names:", iris.target_names)
+
+# --1--
+plt.figure(figsize=(5,4))
+plt.hist(sapal[y==0], bins= 10,color='skyblue')
+plt.title('Histogram with y==0')
+plt.show()
+
+# --2--
+plt.figure(figsize=(5,4))
+plt.hist(sapal[y==1], bins= 10,color='pink')
+plt.title('Histogram with y==1')
+plt.show()
+
+# --3--
+plt.figure(figsize=(5,4))
+plt.hist(sapal[y==2], bins= 10,color='green')
+plt.title('Histogram with y==2')
+plt.show()
+
+#========= ส่วนที่ 2 =============
+dbScan = DBSCAN(eps=0.2, min_samples=5) #เปลี่ยน paramiter ตรง eps พอ และบันทึกผล
+cluster = dbScan.fit_predict(X)
+
+print("==============")
+print(cluster)
+
